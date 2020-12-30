@@ -13,6 +13,8 @@ iex -S mix
 > Aoc20.solve(1, :two)
 ```
 
+You can run the whole batch with `mix verify` to see the status of each day: solved `✓`, not solved `—`, or error.
+
 ## Implementation details
 
 Each day's solution lies on the corresponding module under `lib/days/<day>.ex`. Each of those modules must implement three functions:
