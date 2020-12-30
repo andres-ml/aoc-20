@@ -11,7 +11,7 @@ defmodule Mix.Tasks.Verify do
           Aoc20.solve(day, part)
           IO.write("✓")
         rescue
-          _ in ArgumentError -> IO.write("—")
+          _ in [ArgumentError, UndefinedFunctionError] -> IO.write("—")
           _ -> IO.write("error")
         end
       end
