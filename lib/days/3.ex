@@ -2,9 +2,18 @@ defmodule Day3 do
 
   @tree "#"
 
-  def one(input), do: input |> parse |> trees({3, 1})
-  def two(input) do
-    map = parse(input)
+  def parse(input) do
+    lines = input |> String.split("\n", trim: true) |> Enum.map(&String.graphemes/1)
+    m = length(lines)
+    n = length(List.first(lines))
+    grid = for i <- 0..m-1, j <- 0..n-1,
+      into: %{},
+      do: { {j, i}, Enum.at(Enum.at(lines, i), j) }
+    %{"map" => grid, "N" => n, "M" => m}
+  end
+
+  def one(map), do: trees(map, {3, 1})
+  def two(map) do
     velocities = [
       {1, 1},
       {3, 1},
@@ -18,16 +27,6 @@ defmodule Day3 do
   end
 
   defp trees(map, velocity), do: trajectory(map, velocity) |> Enum.count(& &1 == @tree)
-
-  defp parse(input) do
-    lines = input |> String.split("\n", trim: true) |> Enum.map(&String.graphemes/1)
-    m = length(lines)
-    n = length(List.first(lines))
-    grid = for i <- 0..m-1, j <- 0..n-1,
-      into: %{},
-      do: { {j, i}, Enum.at(Enum.at(lines, i), j) }
-    %{"map" => grid, "N" => n, "M" => m}
-  end
 
   defp trajectory(data, velocity, position \\ {0, 0})
   defp trajectory(%{"M" => depth}, _, {_, py}) when py >= depth, do: []

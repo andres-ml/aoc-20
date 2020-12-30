@@ -1,13 +1,13 @@
 defmodule Day1 do
 
-  def one(input), do: solve(input, 2, 2020)
-  def two(input), do: solve(input, 3, 2020)
+  def parse(input), do: input
+    |> String.split("\n", trim: true)
+    |> Enum.map(&String.to_integer/1)
 
-  def solve(input, size, target) do
-    numbers = input
-      |> String.split("\n", trim: true)
-      |> Enum.map(&String.to_integer/1)
+  def one(numbers), do: solve(numbers, 2, 2020)
+  def two(numbers), do: solve(numbers, 3, 2020)
 
+  def solve(numbers, size, target) do
     case subsetsThatAddUpTo(size, numbers, target) do
       [subset | _] -> Enum.reduce(subset, &Kernel.*/2)
       _ -> "No solution"

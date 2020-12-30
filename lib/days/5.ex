@@ -1,14 +1,17 @@
 defmodule Day5 do
 
-  def one(input), do: parse(input) |> Enum.map(&seat/1) |> Enum.max()
-  def two(input) do
-    map = for id <- parse(input), into: %{}, do: { seat(id), nil }
+  def parse(input), do: String.split(input, "\n", trim: true)
+
+  def one(ids), do: ids
+    |> Enum.map(&seat/1)
+    |> Enum.max()
+
+  def two(ids) do
+    map = for id <- ids, into: %{}, do: { seat(id), nil }
     0..floor(:math.pow(2, 10))
       |> Enum.filter(& !Map.has_key?(map, &1) and Map.has_key?(map, &1-1) and Map.has_key?(map, &1+1))
       |> List.first()
   end
-
-  defp parse(input), do: String.split(input, "\n", trim: true)
 
   defp seat(id) do
     toBinary = fn string, range, map -> string

@@ -1,9 +1,9 @@
 defmodule Aoc20 do
 
   def solve(day, part, inputPath \\ nil) do
-    "Day#{day}"
-      |> loadModule
-      |> apply(part, [readInput(day, inputPath)])
+    solver = loadModule("Day#{day}")
+    input = readInput(day, inputPath)
+    apply(solver, part, [apply(solver, :parse, [input])])
   end
 
   # Dynamically load elixir module by name

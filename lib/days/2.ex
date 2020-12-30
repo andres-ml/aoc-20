@@ -1,9 +1,6 @@
 defmodule Day2 do
 
-  def one(input), do: input |> parse |> Enum.filter(&validOne/1) |> length()
-  def two(input), do: input |> parse |> Enum.filter(&validTwo/1) |> length()
-
-  defp parse(input) do
+  def parse(input) do
     parseLine = fn line ->
       captures = Regex.named_captures(~r/(?<min>\d+)-(?<max>\d+) (?<character>[a-z]): (?<password>[a-z]+)/, line)
       %{
@@ -17,6 +14,9 @@ defmodule Day2 do
       |> String.split("\n", trim: true)
       |> Enum.map(& parseLine.(&1))
   end
+
+  def one(lines), do: lines |> Enum.filter(&validOne/1) |> length()
+  def two(lines), do: lines |> Enum.filter(&validTwo/1) |> length()
 
   # specified character's number of occurrences must be within specified range
   defp validOne(data) do

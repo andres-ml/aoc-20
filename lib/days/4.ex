@@ -3,8 +3,16 @@ defmodule Day4 do
   @keys ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
   @optional ["cid"]
 
-  def one(input), do: parse(input) |> Enum.count(&validOne/1)
-  def two(input) do
+  def parse(input) do
+    input
+      |> String.split("\n\n", trim: true)
+      |> Enum.map(fn data -> Regex.scan(~r/([a-z]+):(\S+)/, data)
+        |> Enum.into(%{}, fn [_, key, value] -> {key, value} end)
+      end)
+  end
+
+  def one(passports), do: Enum.count(passports, &validOne/1)
+  def two(passports) do
     rules = [
       {"byr", & validRange(&1, 1920, 2002)},
       {"iyr", & validRange(&1, 2010, 2020)},
@@ -17,15 +25,7 @@ defmodule Day4 do
 
     validate = fn data, {key, validator} -> is_map_key(data, key) and validator.(data[key]) end
     validateAll = fn data -> Enum.all?(rules, fn rule -> validate.(data, rule) end) end
-    parse(input) |> Enum.count(validateAll)
-  end
-
-  defp parse(input) do
-    input
-      |> String.split("\n\n", trim: true)
-      |> Enum.map(fn data -> Regex.scan(~r/([a-z]+):(\S+)/, data)
-        |> Enum.into(%{}, fn [_, key, value] -> {key, value} end)
-      end)
+    Enum.count(passports, validateAll)
   end
 
   defp validOne(data), do: Enum.all?(@keys -- @optional, & is_map_key(data, &1))

@@ -1,7 +1,7 @@
 defmodule Day6 do
 
-  def one(input), do: parse(input) |> solve(&anyAnswered/1)
-  def two(input), do: parse(input) |> solve(&allAnswered/1)
+  def one(answerGroups), do: solve(answerGroups, &anyAnswered/1)
+  def two(answerGroups), do: solve(answerGroups, &allAnswered/1)
 
   def parse(input), do: input
     |> String.split("\n\n", trim: true)
