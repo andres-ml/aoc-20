@@ -15,7 +15,7 @@ defmodule Aoc20.MixProject do
 
   def deps do
     [
-
+      {:memoize, "~> 1.3"}
     ]
   end
 
