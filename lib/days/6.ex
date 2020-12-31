@@ -4,7 +4,7 @@ defmodule Day6 do
   def two(answerGroups), do: solve(answerGroups, &allAnswered/1)
 
   def parse(input), do: input
-    |> String.split("\n\n", trim: true)
+    |> Utils.Parse.lines("\n\n")
     |> Enum.map(& String.split(&1, "\n", trim: true))
 
   defp solve(answerGroups, extractor), do: answerGroups

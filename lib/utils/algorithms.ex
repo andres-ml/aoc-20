@@ -1,4 +1,4 @@
-defmodule Utils do
+defmodule Utils.Algorithms do
 
   # continously applies `step` over `state` until `condition(state)` is true
   def solve(state, step, condition) do

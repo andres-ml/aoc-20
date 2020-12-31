@@ -1,6 +1,6 @@
 defmodule Day5 do
 
-  def parse(input), do: String.split(input, "\n", trim: true)
+  def parse(input), do: Utils.Parse.lines(input)
 
   def one(ids), do: ids
     |> Enum.map(&seat/1)

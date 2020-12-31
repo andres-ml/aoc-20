@@ -3,7 +3,7 @@ defmodule Day9 do
   @preamble_size 25
 
   def parse(input), do: input
-    |> String.split("\n", trim: true)
+    |> Utils.Parse.lines
     |> Enum.map(& elem(Integer.parse(&1), 0))
 
   def one(numbers) do
@@ -24,7 +24,7 @@ defmodule Day9 do
     {preamble, rest} = Enum.split(numbers, @preamble_size)
     state = %{set: MapSet.new(preamble), queue: :queue.from_list(preamble), list: rest, match: nil}
 
-    Utils.solve(
+    Utils.Algorithms.solve(
       state,
       step,
       fn %{match: match} -> match != nil end
@@ -58,7 +58,7 @@ defmodule Day9 do
       end
     end
 
-    sequence = Utils.solve(
+    sequence = Utils.Algorithms.solve(
       state,
       step,
       fn %{sum: sum} -> sum == target end

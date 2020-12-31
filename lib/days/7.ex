@@ -2,7 +2,7 @@ defmodule Day7 do
 
   # parses bags into a map with the form %{color => %{childColor => childQuantity}}
   def parse(input), do: input
-    |> String.split("\n", trim: true)
+    |> Utils.Parse.lines
     |> Enum.map(& Regex.named_captures(~r/(?<color>[a-z ]+) bags contain (?<data>.+)/, &1))
     |> Enum.into(%{}, (fn %{"color" => color, "data" => data} -> {
         color,

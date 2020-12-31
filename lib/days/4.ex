@@ -5,7 +5,7 @@ defmodule Day4 do
 
   def parse(input) do
     input
-      |> String.split("\n\n", trim: true)
+      |> Utils.Parse.lines("\n\n")
       |> Enum.map(fn data -> Regex.scan(~r/([a-z]+):(\S+)/, data)
         |> Enum.into(%{}, fn [_, key, value] -> {key, value} end)
       end)

@@ -1,7 +1,7 @@
 defmodule Day8 do
 
   def parse(input), do: input
-    |> String.split("\n", trim: true)
+    |> Utils.Parse.lines
     |> Enum.map(& Regex.run(~r/([a-z ]+) ([-+]\d+)/, &1))
     |> Enum.with_index()
     |> Enum.into(%{}, fn {[_match, op, argument], index} -> {index, %{

@@ -3,7 +3,7 @@ defmodule Day3 do
   @tree "#"
 
   def parse(input) do
-    lines = input |> String.split("\n", trim: true) |> Enum.map(&String.graphemes/1)
+    lines = input |> Utils.Parse.lines |> Enum.map(&String.graphemes/1)
     m = length(lines)
     n = length(List.first(lines))
     grid = for i <- 0..m-1, j <- 0..n-1,

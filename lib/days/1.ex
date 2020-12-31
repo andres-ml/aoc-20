@@ -1,7 +1,7 @@
 defmodule Day1 do
 
   def parse(input), do: input
-    |> String.split("\n", trim: true)
+    |> Utils.Parse.lines
     |> Enum.map(&String.to_integer/1)
 
   def one(numbers), do: solve(numbers, 2, 2020)

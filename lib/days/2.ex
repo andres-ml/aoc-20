@@ -11,7 +11,7 @@ defmodule Day2 do
       }
     end
     input
-      |> String.split("\n", trim: true)
+      |> Utils.Parse.lines
       |> Enum.map(& parseLine.(&1))
   end
 
